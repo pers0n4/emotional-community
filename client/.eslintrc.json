@@ -2,8 +2,16 @@
   "extends": [
     "@nuxtjs/eslint-config-typescript",
     "plugin:nuxt/recommended",
-    "prettier"
+    "plugin:vue/recommended",
+    "plugin:prettier/recommended"
   ],
-  "plugins": [],
-  "rules": {}
+  "plugins": ["vue"],
+  "rules": {
+    "vue/attributes-order": [
+      "error",
+      {
+        "alphabetical": true
+      }
+    ]
+  }
 }

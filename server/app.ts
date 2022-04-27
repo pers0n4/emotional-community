@@ -4,6 +4,7 @@ import {
   NestFastifyApplication,
 } from "@nestjs/platform-fastify";
 import { build, loadNuxt } from "nuxt";
+
 import { NuxtFastifyFilter } from "./nuxt.filter";
 import { AppModule } from "./src/app.module";
 

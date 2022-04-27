@@ -34,6 +34,8 @@ const config: NuxtConfig = {
     "@nuxt/typescript-build",
     // https://go.nuxtjs.dev/stylelint
     "@nuxtjs/stylelint-module",
+    // https://go.nuxtjs.dev/vuetify
+    "@nuxtjs/vuetify",
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -54,6 +56,13 @@ const config: NuxtConfig = {
   pwa: {
     manifest: {
       lang: "en",
+    },
+  },
+
+  // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
+  vuetify: {
+    theme: {
+      dark: true,
     },
   },
 

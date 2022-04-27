@@ -7,7 +7,8 @@ const config: Config.InitialOptions = {
   },
   moduleFileExtensions: ["ts", "js", "vue", "json"],
   transform: {
-    "^.+\\.(t|j)s$": "ts-jest",
+    "^.+\\.ts$": "ts-jest",
+    "^.+\\.js$": "babel-jest",
     ".*\\.(vue)$": "vue-jest",
   },
   collectCoverage: true,

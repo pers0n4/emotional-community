@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "paths": {
+      "~/*": ["./client/*"]
+    },
+    "types": ["@nuxt/types", "@nuxtjs/axios", "@types/node", "@types/jest"]
+  },
+  "exclude": ["node_modules", "dist"]
+}

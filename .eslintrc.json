@@ -4,5 +4,35 @@
     "browser": true,
     "node": true,
     "jest": true
+  },
+  "extends": ["plugin:import/recommended", "plugin:import/typescript"],
+  "plugins": ["import"],
+  "rules": {
+    "sort-imports": [
+      "error",
+      {
+        "ignoreDeclarationSort": true
+      }
+    ],
+
+    "import/order": [
+      "error",
+      {
+        "groups": [
+          "builtin",
+          "external",
+          "internal",
+          "parent",
+          "sibling",
+          "index",
+          "type",
+          "object",
+          "unknown"
+        ],
+        "newlines-between": "always",
+        "alphabetize": { "order": "asc", "caseInsensitive": false },
+        "warnOnUnassignedImports": true
+      }
+    ]
   }
 }

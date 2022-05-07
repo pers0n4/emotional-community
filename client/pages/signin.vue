@@ -1,53 +1,47 @@
 <template>
-  <v-layout align-center fill-height justify-center>
-    <v-flex md4 sm8 xs12>
-      <v-card elevation-12>
-        <v-toolbar color="primary">
-          <v-toolbar-title>Login</v-toolbar-title>
-        </v-toolbar>
-        <v-card-text>
-          <v-form ref="form" v-model="valid">
-            <v-text-field
-              v-model="username"
-              label="Username"
-              name="username"
-              prepend-icon="mdi-account"
-              :rules="usernameRules"
-              type="text"
-            ></v-text-field>
-            <v-text-field
+  <div class="is-flex is-justify-content-center mt-6">
+    <section class="card">
+      <header class="card-header has-background-primary">
+        <h2 class="card-header-title has-text-light">Sign In</h2>
+      </header>
+      <div class="card-content">
+        <div class="content">
+          <b-field label="Email" label-position="on-border">
+            <b-input
+              v-model="email"
+              icon="email"
+              placeholder="Email"
+              size="is-medium"
+              type="email"
+            ></b-input>
+          </b-field>
+          <b-field label="Password" label-position="on-border">
+            <b-input
               v-model="password"
-              label="Password"
-              name="password"
-              prepend-icon="mdi-lock"
-              :rules="passwordRules"
+              icon="lock"
+              password-reveal
+              placeholder="Password"
+              size="is-medium"
               type="password"
-            ></v-text-field>
-          </v-form>
-        </v-card-text>
-        <v-card-actions>
-          <v-spacer></v-spacer>
-          <v-btn color="primary" @click="validate">Sign In</v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-flex>
-  </v-layout>
+            ></b-input>
+          </b-field>
+          <b-field>
+            <b-button class="is-right" type="is-primary">Next</b-button>
+          </b-field>
+        </div>
+      </div>
+    </section>
+  </div>
 </template>
 
 <script>
   export default {
     name: "SignInPage",
-    data: () => ({
-      valid: true,
-      username: "",
-      usernameRules: [(v) => !!v || "Username is required"],
-      password: "",
-      passwordRules: [(v) => !!v || "Password is required"],
-    }),
-    methods: {
-      validate() {
-        this.$refs.form.validate();
-      },
+    data() {
+      return {
+        email: "",
+        password: "",
+      };
     },
   };
 </script>

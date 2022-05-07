@@ -1,5 +1,6 @@
 <template>
   <div>
+    <LayoutHeader></LayoutHeader>
     <main class="container">
       <Nuxt />
     </main>

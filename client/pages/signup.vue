@@ -1,52 +1,47 @@
 <template>
-  <v-layout align-center fill-height justify-center>
-    <v-flex md4 sm8 xs12>
-      <v-card elevation-12>
-        <v-toolbar color="primary">
-          <v-toolbar-title>Register</v-toolbar-title>
-        </v-toolbar>
-        <v-card-text>
-          <v-form ref="form" v-model="valid" lazy-validation>
-            <v-text-field
-              v-model="username"
-              label="Username"
-              name="username"
-              prepend-icon="mdi-account"
-              :rules="usernameRules"
-              type="text"
-            ></v-text-field>
-            <v-text-field
+  <div class="is-flex is-justify-content-center mt-6">
+    <section class="card">
+      <header class="card-header has-background-primary">
+        <h2 class="card-header-title has-text-light">Sign In</h2>
+      </header>
+      <div class="card-content">
+        <div class="content">
+          <b-field label="Email" label-position="on-border">
+            <b-input
+              v-model="email"
+              icon="email"
+              placeholder="Email"
+              size="is-medium"
+              type="email"
+            ></b-input>
+          </b-field>
+          <b-field label="Password" label-position="on-border">
+            <b-input
               v-model="password"
-              :append-icon="showPassword ? 'mdi-eye' : 'mdi-eye-off'"
-              label="Password"
-              name="password"
-              prepend-icon="mdi-lock"
-              :rules="passwordRules"
-              :type="showPassword ? 'text' : 'password'"
-              @click:append="showPassword = !showPassword"
-            ></v-text-field>
-            <v-text-field
-              v-model="passwordConfirm"
-              :append-icon="showPasswordConfirm ? 'mdi-eye' : 'mdi-eye-off'"
-              counter
-              label="Confirm Password"
-              name="password-confirm"
-              prepend-icon="mdi-lock"
-              :rules="passwordConfirmRules"
-              :type="showPasswordConfirm ? 'text' : 'password'"
-              @click:append="showPasswordConfirm = !showPasswordConfirm"
-            ></v-text-field>
-          </v-form>
-        </v-card-text>
-        <v-card-actions>
-          <v-spacer></v-spacer>
-          <v-btn color="primary" :disabled="!valid" @click="validate"
-            >Sign Up</v-btn
-          >
-        </v-card-actions>
-      </v-card>
-    </v-flex>
-  </v-layout>
+              icon="lock"
+              password-reveal
+              placeholder="Password"
+              size="is-medium"
+              type="password"
+            ></b-input>
+          </b-field>
+          <b-field label="Confirm" label-position="on-border">
+            <b-input
+              v-model="confirmPassword"
+              icon="lock"
+              password-reveal
+              placeholder="Confirm"
+              size="is-medium"
+              type="password"
+            ></b-input>
+          </b-field>
+          <b-field>
+            <b-button class="is-right" type="is-primary">Next</b-button>
+          </b-field>
+        </div>
+      </div>
+    </section>
+  </div>
 </template>
 
 <script>
@@ -54,24 +49,10 @@
     name: "SignUpPage",
     data() {
       return {
-        valid: true,
-        username: "",
-        usernameRules: [(v) => !!v || "Username is required"],
+        email: "",
         password: "",
-        passwordRules: [(v) => !!v || "Password is required"],
-        passwordConfirm: "",
-        passwordConfirmRules: [
-          (v) => !!v || "Password confirmation is required",
-          (v) => v === this.password || "Password confirmation doesn't match",
-        ],
-        showPassword: false,
-        showPasswordConfirm: false,
+        confirmPassword: "",
       };
-    },
-    methods: {
-      validate() {
-        this.$refs.form.validate();
-      },
     },
   };
 </script>

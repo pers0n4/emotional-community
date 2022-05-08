@@ -1,5 +1,5 @@
-import { Module } from "@nestjs/common";
-import { APP_FILTER } from "@nestjs/core";
+import { Module, ValidationPipe } from "@nestjs/common";
+import { APP_FILTER, APP_PIPE } from "@nestjs/core";
 import { TypeOrmModule } from "@nestjs/typeorm";
 
 import { AppController } from "./app.controller";
@@ -25,6 +25,14 @@ import { UsersModule } from "./users/users.module";
     {
       provide: APP_FILTER,
       useClass: HttpExceptionFilter,
+    },
+    {
+      provide: APP_PIPE,
+      useValue: new ValidationPipe({
+        transform: true,
+        whitelist: true,
+        forbidNonWhitelisted: true,
+      }),
     },
   ],
 })

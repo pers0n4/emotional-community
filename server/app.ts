@@ -24,7 +24,6 @@ async function bootstrap() {
   }
 
   nest.useGlobalFilters(new NuxtFastifyFilter(nuxt));
-  nest.setGlobalPrefix("/api");
 
   await nest.listen(3000);
 }

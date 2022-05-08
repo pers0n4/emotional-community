@@ -1,5 +1,5 @@
 import { Module, ValidationPipe } from "@nestjs/common";
-import { APP_FILTER, APP_PIPE } from "@nestjs/core";
+import { APP_FILTER, APP_PIPE, RouterModule } from "@nestjs/core";
 import { TypeOrmModule } from "@nestjs/typeorm";
 
 import { AppController } from "./app.controller";
@@ -16,7 +16,12 @@ import { UsersModule } from "./users/users.module";
       entities: [__dirname + "/**/*.entity{.ts,.js}"],
       synchronize: true,
     }),
-    UsersModule,
+    RouterModule.register([
+      {
+        path: "api",
+        children: [UsersModule],
+      },
+    ]),
     AuthModule,
   ],
   controllers: [AppController],

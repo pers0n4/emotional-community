@@ -71,9 +71,10 @@ export class UsersService {
     }
   }
 
-  async remove(id: number) {
+  async remove(id: number | User) {
     try {
-      const user = await this.usersRepository.findOne(id);
+      const user =
+        typeof id === "number" ? await this.usersRepository.findOne(id) : id;
       return await this.usersRepository.remove(user);
     } catch (error) {
       throw new NotFoundException("User not found", error.message);

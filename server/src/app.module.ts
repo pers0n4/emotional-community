@@ -1,5 +1,14 @@
-import { Module, ValidationPipe } from "@nestjs/common";
-import { APP_FILTER, APP_PIPE, RouterModule } from "@nestjs/core";
+import {
+  ClassSerializerInterceptor,
+  Module,
+  ValidationPipe,
+} from "@nestjs/common";
+import {
+  APP_FILTER,
+  APP_INTERCEPTOR,
+  APP_PIPE,
+  RouterModule,
+} from "@nestjs/core";
 import { TypeOrmModule } from "@nestjs/typeorm";
 
 import { AppController } from "./app.controller";
@@ -38,6 +47,10 @@ import { UsersModule } from "./users/users.module";
         whitelist: true,
         forbidNonWhitelisted: true,
       }),
+    },
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: ClassSerializerInterceptor,
     },
   ],
 })

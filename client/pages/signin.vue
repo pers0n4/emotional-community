@@ -11,7 +11,6 @@
               v-model="email"
               icon="email"
               placeholder="Email"
-              size="is-medium"
               type="email"
             ></b-input>
           </b-field>
@@ -21,7 +20,6 @@
               icon="lock"
               password-reveal
               placeholder="Password"
-              size="is-medium"
               type="password"
             ></b-input>
           </b-field>

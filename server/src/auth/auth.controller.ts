@@ -14,7 +14,7 @@ export class AuthController {
   @UseGuards(LocalAuthGuard)
   @Post("token")
   async token(@Request() request) {
-    return this.authService.token(request.user);
+    return this.authService.sign(request.user);
   }
 
   @UseGuards(JwtAuthGuard)

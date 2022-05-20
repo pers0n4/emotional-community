@@ -24,7 +24,9 @@
             ></b-input>
           </b-field>
           <b-field>
-            <b-button class="is-right" type="is-primary">Next</b-button>
+            <b-button class="is-right" type="is-primary" @click="signIn"
+              >Next</b-button
+            >
           </b-field>
         </div>
       </div>
@@ -33,6 +35,8 @@
 </template>
 
 <script>
+  import { mapActions } from "vuex";
+
   export default {
     name: "SignInPage",
     data() {
@@ -40,6 +44,17 @@
         email: "",
         password: "",
       };
+    },
+    methods: {
+      ...mapActions({
+        authenticate: "auth/authenticate",
+      }),
+      async signIn() {
+        await this.authenticate({
+          email: this.email,
+          password: this.password,
+        });
+      },
     },
   };
 </script>

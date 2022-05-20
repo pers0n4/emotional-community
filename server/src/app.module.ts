@@ -24,13 +24,15 @@ import { UsersModule } from "./users/users.module";
       database: ":memory:",
       entities: [__dirname + "/**/*.entity{.ts,.js}"],
       synchronize: true,
+      logging: true,
     }),
     RouterModule.register([
       {
         path: "api",
-        children: [UsersModule],
+        children: [UsersModule, AuthModule],
       },
     ]),
+    UsersModule,
     AuthModule,
   ],
   controllers: [AppController],

@@ -2,7 +2,7 @@
   <div class="is-flex is-justify-content-center mt-6">
     <section class="card">
       <header class="card-header has-background-primary">
-        <h2 class="card-header-title has-text-light">Sign In</h2>
+        <h2 class="card-header-title has-text-light">Sign Up</h2>
       </header>
       <div class="card-content">
         <div class="content">

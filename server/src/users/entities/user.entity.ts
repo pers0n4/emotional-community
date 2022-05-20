@@ -1,4 +1,5 @@
 import { Exclude } from "class-transformer";
+import { IsEmail } from "class-validator";
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
@@ -7,7 +8,8 @@ export class User {
   id: number;
 
   @Column({ unique: true })
-  username: string;
+  @IsEmail()
+  email: string;
 
   @Exclude()
   @Column()

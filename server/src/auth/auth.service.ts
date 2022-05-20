@@ -12,8 +12,8 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
 
-  async validateUser(username: string, password: string) {
-    const user = await this.usersService.findOneByUsername(username);
+  async validateUser(email: string, password: string) {
+    const user = await this.usersService.findOneByEmail(email);
     if (user && (await bcrypt.compare(password, user.password))) {
       return user;
     }
@@ -21,7 +21,7 @@ export class AuthService {
   }
 
   async token(user: User) {
-    const payload = { username: user.username, sub: user.id };
+    const payload = { email: user.email, sub: user.id };
     return {
       access_token: this.jwtService.sign(payload),
       token_type: "Bearer",

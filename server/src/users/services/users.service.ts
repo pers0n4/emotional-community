@@ -21,11 +21,11 @@ export class UsersService {
     this.saltOrRounds = 10;
   }
 
-  async create({ username, password }: CreateUserDto) {
+  async create({ email, password }: CreateUserDto) {
     try {
       const hash = await bcrypt.hash(password, this.saltOrRounds);
       return await this.usersRepository.save({
-        username,
+        email,
         password: hash,
       });
     } catch (error) {
@@ -45,9 +45,9 @@ export class UsersService {
     }
   }
 
-  async findOneByUsername(username: string) {
+  async findOneByEmail(email: string) {
     try {
-      return await this.usersRepository.findOneOrFail({ username });
+      return await this.usersRepository.findOneOrFail({ email });
     } catch (error) {
       throw new NotFoundException("User not found", error.message);
     }

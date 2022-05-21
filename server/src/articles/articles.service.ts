@@ -24,7 +24,7 @@ export class ArticlesService {
   }
 
   async findAll() {
-    return this.articlesRepository.find();
+    return this.articlesRepository.find({ loadEagerRelations: false });
   }
 
   async findOne(slug: number) {

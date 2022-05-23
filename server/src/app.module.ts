@@ -3,6 +3,7 @@ import {
   Module,
   ValidationPipe,
 } from "@nestjs/common";
+import { ConfigModule } from "@nestjs/config";
 import {
   APP_FILTER,
   APP_INTERCEPTOR,
@@ -21,6 +22,7 @@ import { UsersModule } from "./users/users.module";
 
 @Module({
   imports: [
+    ConfigModule.forRoot(),
     TypeOrmModule.forRoot({
       type: "sqlite",
       database: ":memory:",

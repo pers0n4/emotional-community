@@ -3,12 +3,14 @@ import {
   Module,
   ValidationPipe,
 } from "@nestjs/common";
+import { ConfigModule } from "@nestjs/config";
 import {
   APP_FILTER,
   APP_INTERCEPTOR,
   APP_PIPE,
   RouterModule,
 } from "@nestjs/core";
+import { ScheduleModule } from "@nestjs/schedule";
 import { TypeOrmModule } from "@nestjs/typeorm";
 
 import { AppController } from "./app.controller";
@@ -20,6 +22,7 @@ import { UsersModule } from "./users/users.module";
 
 @Module({
   imports: [
+    ConfigModule.forRoot(),
     TypeOrmModule.forRoot({
       type: "sqlite",
       database: ":memory:",
@@ -27,6 +30,7 @@ import { UsersModule } from "./users/users.module";
       synchronize: true,
       logging: true,
     }),
+    ScheduleModule.forRoot(),
     RouterModule.register([
       {
         path: "api",

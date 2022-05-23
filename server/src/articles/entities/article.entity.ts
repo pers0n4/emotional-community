@@ -22,6 +22,21 @@ export class Article {
   @Column()
   content: string;
 
+  @Column({ nullable: true })
+  detectedEntities: string;
+
+  @Column({ nullable: true })
+  detectedSentiment: string;
+
+  @Column({ nullable: true })
+  detectedSentimentScore: string;
+
+  @Column({ nullable: true })
+  confirmedEntities: string;
+
+  @Column({ nullable: true })
+  confirmedSentiment: string;
+
   @ManyToOne(() => User, (user) => user.articles)
   @JoinColumn()
   user: User;

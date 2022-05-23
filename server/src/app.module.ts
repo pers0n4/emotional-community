@@ -13,6 +13,7 @@ import { TypeOrmModule } from "@nestjs/typeorm";
 
 import { AppController } from "./app.controller";
 import { AppService } from "./app.service";
+import { ArticlesModule } from "./articles/articles.module";
 import { AuthModule } from "./auth/auth.module";
 import { HttpExceptionFilter } from "./common/filter/http-exception.filter";
 import { UsersModule } from "./users/users.module";
@@ -29,11 +30,12 @@ import { UsersModule } from "./users/users.module";
     RouterModule.register([
       {
         path: "api",
-        children: [UsersModule, AuthModule],
+        children: [UsersModule, AuthModule, ArticlesModule],
       },
     ]),
     UsersModule,
     AuthModule,
+    ArticlesModule,
   ],
   controllers: [AppController],
   providers: [

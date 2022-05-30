@@ -44,28 +44,30 @@
 </template>
 
 <script>
-  import { mapActions } from "vuex";
-
   export default {
     name: "SignUpPage",
+    middleware: "auth",
+    auth: "guest",
     data() {
       return {
-        email: "",
+        email: "test@example.org",
         password: "",
         confirmPassword: "",
       };
     },
     methods: {
-      ...mapActions({
-        register: "auth/register",
-      }),
       async signUp() {
-        await this.register({
-          email: this.email,
-          password: this.password,
-        });
+        try {
+          await this.$axios.$post("/users", {
+            email: this.email,
+            password: this.password,
+          });
 
-        this.$router.push("/signin");
+          this.$router.push("/signin");
+        } catch (err) {
+          // eslint-disable-next-line no-console
+          console.error(err);
+        }
       },
     },
   };

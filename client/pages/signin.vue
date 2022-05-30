@@ -35,25 +35,29 @@
 </template>
 
 <script>
-  import { mapActions } from "vuex";
-
   export default {
     name: "SignInPage",
+    middleware: "auth",
+    auth: "guest",
     data() {
       return {
-        email: "",
+        email: "test@example.org",
         password: "",
       };
     },
     methods: {
-      ...mapActions({
-        authenticate: "auth/authenticate",
-      }),
       async signIn() {
-        await this.authenticate({
-          email: this.email,
-          password: this.password,
-        });
+        try {
+          await this.$auth.loginWith("local", {
+            data: {
+              email: this.email,
+              password: this.password,
+            },
+          });
+        } catch (err) {
+          // eslint-disable-next-line no-console
+          console.error(err);
+        }
       },
     },
   };

@@ -24,7 +24,9 @@ export class GenresService {
   }
 
   async findOne(id: number) {
-    return this.genresRepository.findOne(id);
+    return this.genresRepository.findOne(id, {
+      relations: ["tracks"],
+    });
   }
 
   async update(id: number, updateGenreDto: UpdateGenreDto) {

@@ -17,8 +17,8 @@ export class Article {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
-  title: string;
+  // @Column()
+  // title: string;
 
   @Column()
   content: string;

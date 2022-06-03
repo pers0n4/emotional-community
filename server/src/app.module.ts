@@ -15,8 +15,8 @@ import { TypeOrmModule } from "@nestjs/typeorm";
 
 import { AppController } from "./app.controller";
 import { AppService } from "./app.service";
-import { ArticlesModule } from "./articles/articles.module";
 import { AuthModule } from "./auth/auth.module";
+import { CommentsModule } from "./comments/comments.module";
 import { HttpExceptionFilter } from "./common/filter/http-exception.filter";
 import { GenresModule } from "./genres/genres.module";
 import { TracksModule } from "./tracks/tracks.module";
@@ -39,17 +39,17 @@ import { UsersModule } from "./users/users.module";
         children: [
           UsersModule,
           AuthModule,
-          ArticlesModule,
           GenresModule,
           TracksModule,
+          CommentsModule,
         ],
       },
     ]),
     UsersModule,
     AuthModule,
-    ArticlesModule,
     GenresModule,
     TracksModule,
+    CommentsModule,
   ],
   controllers: [AppController],
   providers: [

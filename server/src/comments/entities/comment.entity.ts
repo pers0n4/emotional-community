@@ -4,24 +4,19 @@ import {
   Entity,
   JoinColumn,
   ManyToOne,
-  OneToMany,
   PrimaryGeneratedColumn,
 } from "typeorm";
 
+import { Track } from "../../tracks/entities/track.entity";
 import { User } from "../../users/entities/user.entity";
 
-import { Comment } from "./comment.entity";
-
-@Entity("articles")
-export class Article {
+@Entity("comments")
+export class Comment {
   @PrimaryGeneratedColumn()
   id: number;
 
-  // @Column()
-  // title: string;
-
   @Column()
-  content: string;
+  body: string;
 
   @Transform(({ value }) => JSON.parse(value))
   @Column({ nullable: true })
@@ -40,11 +35,12 @@ export class Article {
   @Column({ nullable: true })
   confirmedSentiment: string;
 
+  @ManyToOne(() => Track, (track) => track.comments)
+  @JoinColumn()
+  track: Track;
+
   @Exclude()
-  @ManyToOne(() => User, (user) => user.articles)
+  @ManyToOne(() => User, (user) => user.comments)
   @JoinColumn()
   user: User;
-
-  @OneToMany(() => Comment, (comment) => comment.article, { eager: true })
-  comments: Comment[];
 }

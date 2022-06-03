@@ -18,7 +18,9 @@ export class TracksService {
       ...createTrackDto,
     });
 
-    return this.tracksRepository.findOne(track.id);
+    return this.tracksRepository.findOneBy({
+      id: track.id,
+    });
   }
 
   async findAll() {
@@ -26,7 +28,7 @@ export class TracksService {
   }
 
   async findOne(id: number) {
-    return this.tracksRepository.findOne(id);
+    return this.tracksRepository.findOneBy({ id });
   }
 
   async update(id: number, updateTrackDto: UpdateTrackDto) {

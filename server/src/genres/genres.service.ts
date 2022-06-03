@@ -24,8 +24,11 @@ export class GenresService {
   }
 
   async findOne(id: number) {
-    return this.genresRepository.findOne(id, {
-      relations: ["tracks"],
+    return this.genresRepository.findOne({
+      where: { id },
+      relations: {
+        tracks: true,
+      },
     });
   }
 

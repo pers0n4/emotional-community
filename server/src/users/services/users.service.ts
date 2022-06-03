@@ -24,10 +24,11 @@ export class UsersService {
   async create({ email, password }: CreateUserDto) {
     try {
       const hash = await bcrypt.hash(password, this.saltOrRounds);
-      return await this.usersRepository.save({
+      const user = await this.usersRepository.save({
         email,
         password: hash,
       });
+      return this.usersRepository.findOneBy({ id: user.id });
     } catch (error) {
       throw new ConflictException("User already exists", error.message);
     }
@@ -39,7 +40,7 @@ export class UsersService {
 
   async findOne(id: number) {
     try {
-      return await this.usersRepository.findOneOrFail(id);
+      return await this.usersRepository.findOneByOrFail({ id });
     } catch (error) {
       throw new NotFoundException("User not found", error.message);
     }
@@ -47,7 +48,7 @@ export class UsersService {
 
   async findOneByEmail(email: string) {
     try {
-      return await this.usersRepository.findOneOrFail({ email });
+      return await this.usersRepository.findOneByOrFail({ email });
     } catch (error) {
       throw new NotFoundException("User not found", error.message);
     }
@@ -65,16 +66,18 @@ export class UsersService {
             }
           : updateUserDto,
       );
-      return await this.usersRepository.findOneOrFail(id);
+      return await this.usersRepository.findOneByOrFail({ id });
     } catch (error) {
       throw new NotFoundException("User not found", error.message);
     }
   }
 
-  async remove(id: number | User) {
+  async remove(idOrUser: number | User) {
     try {
       const user =
-        typeof id === "number" ? await this.usersRepository.findOne(id) : id;
+        typeof idOrUser === "number"
+          ? await this.usersRepository.findOneBy({ id: idOrUser })
+          : idOrUser;
       return await this.usersRepository.remove(user);
     } catch (error) {
       throw new NotFoundException("User not found", error.message);

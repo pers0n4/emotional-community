@@ -44,7 +44,7 @@ export class CommentsService {
       this.analyzeComment(comment),
     );
 
-    return this.commentsRepository.findOne(comment.id);
+    return this.commentsRepository.findOneBy({ id: comment.id });
   }
 
   async analyzeComment(comment: Comment) {
@@ -80,7 +80,9 @@ export class CommentsService {
   }
 
   async findOne(id: number) {
-    return this.commentsRepository.findOne(id);
+    return this.commentsRepository.findOneBy({
+      id,
+    });
   }
 
   async update(id: number, updateCommentDto: UpdateCommentDto) {

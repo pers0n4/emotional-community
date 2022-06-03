@@ -19,6 +19,7 @@ import { ArticlesModule } from "./articles/articles.module";
 import { AuthModule } from "./auth/auth.module";
 import { HttpExceptionFilter } from "./common/filter/http-exception.filter";
 import { GenresModule } from "./genres/genres.module";
+import { TracksModule } from "./tracks/tracks.module";
 import { UsersModule } from "./users/users.module";
 
 @Module({
@@ -35,13 +36,20 @@ import { UsersModule } from "./users/users.module";
     RouterModule.register([
       {
         path: "api",
-        children: [UsersModule, AuthModule, ArticlesModule, GenresModule],
+        children: [
+          UsersModule,
+          AuthModule,
+          ArticlesModule,
+          GenresModule,
+          TracksModule,
+        ],
       },
     ]),
     UsersModule,
     AuthModule,
     ArticlesModule,
     GenresModule,
+    TracksModule,
   ],
   controllers: [AppController],
   providers: [

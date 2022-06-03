@@ -19,19 +19,19 @@ export class GenresService {
     });
   }
 
-  findAll() {
+  async findAll() {
     return this.genresRepository.find();
   }
 
-  findOne(id: number) {
+  async findOne(id: number) {
     return this.genresRepository.findOne(id);
   }
 
-  update(id: number, updateGenreDto: UpdateGenreDto) {
+  async update(id: number, updateGenreDto: UpdateGenreDto) {
     return this.genresRepository.update(id, updateGenreDto);
   }
 
-  remove(id: number) {
+  async remove(id: number) {
     return this.genresRepository.delete(id);
   }
 }

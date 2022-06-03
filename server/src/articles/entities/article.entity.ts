@@ -1,3 +1,4 @@
+import { Transform } from "class-transformer";
 import {
   Column,
   Entity,
@@ -22,12 +23,14 @@ export class Article {
   @Column()
   content: string;
 
+  @Transform(({ value }) => JSON.parse(value))
   @Column({ nullable: true })
   detectedEntities: string;
 
   @Column({ nullable: true })
   detectedSentiment: string;
 
+  @Transform(({ value }) => JSON.parse(value))
   @Column({ nullable: true })
   detectedSentimentScore: string;
 

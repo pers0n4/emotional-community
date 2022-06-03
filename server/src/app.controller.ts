@@ -10,4 +10,9 @@ export class AppController {
   getHello(): string {
     return this.appService.getHello();
   }
+
+  @Get("/inititalize")
+  async inititalize() {
+    return this.appService.inititalize();
+  }
 }

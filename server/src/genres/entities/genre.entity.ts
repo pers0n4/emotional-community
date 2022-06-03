@@ -10,7 +10,7 @@ export class Genre {
   @Column()
   name: string;
 
-  @Column()
+  @Column({ unique: true })
   path: string;
 
   @OneToMany(() => Track, (track) => track.genre)

@@ -19,7 +19,10 @@ export class Track {
   @Column()
   artist: string;
 
+  @Column()
+  genreId: number;
+
   @ManyToOne(() => Genre, (genre) => genre.tracks)
-  @JoinColumn()
+  @JoinColumn({ name: "genreId" })
   genre: Genre;
 }

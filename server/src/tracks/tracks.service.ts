@@ -16,9 +16,6 @@ export class TracksService {
   async create(createTrackDto: CreateTrackDto) {
     const track = await this.tracksRepository.save({
       ...createTrackDto,
-      genre: {
-        id: createTrackDto.genreId,
-      },
     });
 
     return this.tracksRepository.findOne(track.id);

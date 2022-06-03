@@ -1,4 +1,4 @@
-import { Transform } from "class-transformer";
+import { Exclude, Transform } from "class-transformer";
 import {
   Column,
   Entity,
@@ -40,6 +40,7 @@ export class Article {
   @Column({ nullable: true })
   confirmedSentiment: string;
 
+  @Exclude()
   @ManyToOne(() => User, (user) => user.articles)
   @JoinColumn()
   user: User;

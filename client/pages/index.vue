@@ -35,7 +35,7 @@
       </section>
       <section class="column is-three-quarters">
         <div>
-          <b-table :data="data" :focusable="isFocusable">
+          <b-table :data="data" focusable>
             <template v-for="column in columns">
               <b-table-column :key="column.id" v-bind="column">
                 <template

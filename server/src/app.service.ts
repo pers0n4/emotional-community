@@ -1,11 +1,14 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable, Logger } from "@nestjs/common";
 import { DataSource } from "typeorm";
 
 import { Genre } from "./genres/entities/genre.entity";
-import { genres } from "./seeds";
+import { genres, tracks } from "./seeds";
+import { Track } from "./tracks/entities/track.entity";
 
 @Injectable()
 export class AppService {
+  private readonly logger = new Logger(AppService.name);
+
   constructor(private dataSource: DataSource) {}
 
   getHello(): string {
@@ -13,6 +16,11 @@ export class AppService {
   }
 
   async initialize() {
+    await this.initializeGenre();
+    await this.initializeTrack();
+  }
+
+  async initializeGenre() {
     const queryRunner = this.dataSource.createQueryRunner();
 
     await queryRunner.connect();
@@ -28,7 +36,38 @@ export class AppService {
       );
 
       await queryRunner.commitTransaction();
-    } catch (err) {
+      this.logger.verbose("Genres created");
+    } catch (error) {
+      await queryRunner.rollbackTransaction();
+    } finally {
+      await queryRunner.release();
+    }
+  }
+
+  async initializeTrack() {
+    const queryRunner = this.dataSource.createQueryRunner();
+
+    await queryRunner.connect();
+    await queryRunner.startTransaction();
+    try {
+      const genreModels = await queryRunner.manager.find(Genre);
+
+      await queryRunner.manager.save(
+        tracks.map(({ title, artist, genres: genreNames }) => {
+          const track = new Track();
+          track.title = title;
+          track.artist = artist;
+          track.genreId = genreModels.find(
+            (genre) => genre.name === genreNames[0],
+          ).id;
+          return track;
+        }),
+      );
+
+      await queryRunner.commitTransaction();
+      this.logger.verbose("Tracks created");
+    } catch (error) {
+      console.error(error);
       await queryRunner.rollbackTransaction();
     } finally {
       await queryRunner.release();

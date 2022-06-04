@@ -20,15 +20,13 @@
                   </b-menu-item>
                   <b-menu-item icon="menu" label="전체글 보기"></b-menu-item>
                   <b-menu-item icon="menu-down" label="장르별 보기">
-                    <b-menu-item icon="" label="발라드"></b-menu-item>
-                    <b-menu-item icon="" label="댄스/팝"></b-menu-item>
-                    <b-menu-item icon="" label="아이돌"></b-menu-item>
-                    <b-menu-item icon="" label="포크/어쿠스틱"></b-menu-item>
-                    <b-menu-item icon="" label="랩/힙합"></b-menu-item>
-                    <b-menu-item icon="" label="알앤비/소울"></b-menu-item>
-                    <b-menu-item icon="" label="클래식"></b-menu-item>
-                    <b-menu-item icon="" label="인디"></b-menu-item
-                  ></b-menu-item>
+                    <b-menu-item
+                      v-for="genre in genres"
+                      :key="genre.path"
+                      :label="genre.name"
+                    ></b-menu-item>
+                    ></b-menu-item
+                  >
                 </b-menu-list>
               </b-menu>
             </div>
@@ -72,6 +70,7 @@
     name: "IndexPage",
     data() {
       return {
+        genres: [],
         data: [
           {
             id: 1,
@@ -140,9 +139,16 @@
         ],
       };
     },
+    created() {
+      this.fetchGenres();
+    },
     methods: {
       btn_write() {
         this.$router.push("/write");
+      },
+      async fetchGenres() {
+        const genres = await this.$axios.$get("/genres");
+        this.genres = genres;
       },
     },
   });

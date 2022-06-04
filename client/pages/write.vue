@@ -1,6 +1,7 @@
 <template>
   <div>
     <img alt="mev logo image" :src="require('../static/mev.png')" />
+
     <div class="sidebar-page columns">
       <section class="sidebar-layout column">
         <b-sidebar open position="static">
@@ -37,25 +38,7 @@
       </section>
       <section class="column is-three-quarters">
         <div>
-          <b-table :data="data" :focusable="isFocusable">
-            <template v-for="column in columns">
-              <b-table-column :key="column.id" v-bind="column">
-                <template
-                  v-if="column.searchable && !column.numeric"
-                  #searchable="props"
-                >
-                  <b-input
-                    v-model="props.filters[props.column.field]"
-                    icon="magnify"
-                    placeholder="Search..."
-                  />
-                </template>
-                <template #default="props">
-                  {{ props.row[column.field] }}
-                </template>
-              </b-table-column>
-            </template>
-          </b-table>
+          <textarea></textarea>
           <div>
             <button id="write" @click="btn_write">글쓰기</button>
           </div>
@@ -139,11 +122,6 @@
           },
         ],
       };
-    },
-    methods: {
-      btn_write() {
-        this.$router.push("/write");
-      },
     },
   });
 </script>

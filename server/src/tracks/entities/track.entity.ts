@@ -1,8 +1,8 @@
 import {
   Column,
   Entity,
-  JoinColumn,
-  ManyToOne,
+  JoinTable,
+  ManyToMany,
   OneToMany,
   PrimaryGeneratedColumn,
 } from "typeorm";
@@ -21,12 +21,9 @@ export class Track {
   @Column()
   artist: string;
 
-  @Column()
-  genreId: number;
-
-  @ManyToOne(() => Genre, (genre) => genre.tracks)
-  @JoinColumn({ name: "genreId" })
-  genre: Genre;
+  @ManyToMany(() => Genre, (genre) => genre.tracks)
+  @JoinTable()
+  genres: Genre[];
 
   @OneToMany(() => Comment, (comment) => comment.track, { eager: true })
   comments: Comment[];

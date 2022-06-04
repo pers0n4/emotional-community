@@ -1,4 +1,4 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, ManyToMany, PrimaryGeneratedColumn } from "typeorm";
 
 import { Track } from "../../tracks/entities/track.entity";
 
@@ -13,6 +13,6 @@ export class Genre {
   @Column({ unique: true })
   path: string;
 
-  @OneToMany(() => Track, (track) => track.genre)
+  @ManyToMany(() => Track, (track) => track.genres)
   tracks: Track[];
 }

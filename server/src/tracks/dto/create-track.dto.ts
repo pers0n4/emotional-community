@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsNumber, IsString } from "class-validator";
+import { IsNotEmpty, IsNumber, IsOptional, IsString } from "class-validator";
 
 export class CreateTrackDto {
   @IsString()
@@ -9,7 +9,16 @@ export class CreateTrackDto {
   @IsNotEmpty()
   readonly artist: string;
 
-  @IsNumber()
-  @IsNotEmpty()
-  readonly genreId: number;
+  @IsOptional()
+  readonly genreIds: number[];
+
+  @IsOptional()
+  readonly genreNames: string[];
+
+  get genres() {
+    return (
+      this.genreIds?.map((id) => ({ id })) ??
+      this.genreNames?.map((name) => ({ name }))
+    );
+  }
 }

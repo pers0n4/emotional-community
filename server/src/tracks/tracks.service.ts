@@ -2,6 +2,8 @@ import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { Repository } from "typeorm";
 
+import { Genre } from "../genres/entities/genre.entity";
+
 import { CreateTrackDto } from "./dto/create-track.dto";
 import { UpdateTrackDto } from "./dto/update-track.dto";
 import { Track } from "./entities/track.entity";
@@ -11,11 +13,18 @@ export class TracksService {
   constructor(
     @InjectRepository(Track)
     private tracksRepository: Repository<Track>,
+    @InjectRepository(Genre)
+    private genresRepository: Repository<Genre>,
   ) {}
 
   async create(createTrackDto: CreateTrackDto) {
     const track = await this.tracksRepository.save({
       ...createTrackDto,
+      genres: await Promise.all(
+        createTrackDto.genres.map((genre) =>
+          this.genresRepository.findOneBy(genre),
+        ),
+      ),
     });
 
     return this.tracksRepository.findOneBy({

@@ -69,9 +69,9 @@ export class AppService {
           const track = new Track();
           track.title = title;
           track.artist = artist;
-          track.genreId = genreModels.find(
-            (genre) => genre.name === genreNames[0],
-          ).id;
+          track.genres = genreNames.map((genreName) =>
+            genreModels.find(({ name }) => name === genreName),
+          );
           return track;
         }),
       );

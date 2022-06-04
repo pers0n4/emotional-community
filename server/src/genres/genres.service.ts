@@ -20,7 +20,21 @@ export class GenresService {
   }
 
   async findAll() {
-    return this.genresRepository.find();
+    return this.genresRepository
+      .find({
+        relations: {
+          tracks: true,
+        },
+      })
+      .then((genres) => {
+        return genres.map((genre) => {
+          return {
+            ...genre,
+            tracks: undefined,
+            count: genre.tracks.length,
+          };
+        });
+      });
   }
 
   async findOne(id: number) {

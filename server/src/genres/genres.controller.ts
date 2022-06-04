@@ -6,6 +6,7 @@ import {
   Param,
   Patch,
   Post,
+  Query,
 } from "@nestjs/common";
 
 import { CreateGenreDto } from "./dto/create-genre.dto";
@@ -22,8 +23,12 @@ export class GenresController {
   }
 
   @Get()
-  findAll() {
-    return this.genresService.findAll();
+  findAll(@Query("name") name: string) {
+    if (name) {
+      return this.genresService.findByName(name);
+    } else {
+      return this.genresService.findAll();
+    }
   }
 
   @Get(":id")

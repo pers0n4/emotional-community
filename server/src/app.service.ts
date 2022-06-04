@@ -11,7 +11,7 @@ export class AppService {
     return "Hello World!";
   }
 
-  async inititalize() {
+  async initialize() {
     const queryRunner = this.dataSource.createQueryRunner();
 
     await queryRunner.connect();

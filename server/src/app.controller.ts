@@ -11,8 +11,8 @@ export class AppController {
     return this.appService.getHello();
   }
 
-  @Get("/inititalize")
-  async inititalize() {
-    return this.appService.inititalize();
+  @Get("/initialize")
+  async initialize() {
+    return this.appService.initialize();
   }
 }

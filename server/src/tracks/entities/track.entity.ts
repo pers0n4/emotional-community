@@ -16,7 +16,7 @@ export class Track {
   id: number;
 
   @Column()
-  name: string;
+  title: string;
 
   @Column()
   artist: string;

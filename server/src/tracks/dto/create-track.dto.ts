@@ -3,7 +3,7 @@ import { IsNotEmpty, IsNumber, IsString } from "class-validator";
 export class CreateTrackDto {
   @IsString()
   @IsNotEmpty()
-  readonly name: string;
+  readonly title: string;
 
   @IsString()
   @IsNotEmpty()

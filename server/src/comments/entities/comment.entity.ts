@@ -35,8 +35,11 @@ export class Comment {
   @Column({ nullable: true })
   confirmedSentiment: string;
 
+  @Column()
+  trackId: number;
+
   @ManyToOne(() => Track, (track) => track.comments)
-  @JoinColumn()
+  @JoinColumn({ name: "trackId" })
   track: Track;
 
   @Exclude()

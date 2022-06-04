@@ -1,6 +1,17 @@
-import { Genre } from "./genres/entities/genre.entity";
+type GenreNames =
+  | "댄스/팝"
+  | "발라드"
+  | "랩/힙합"
+  | "알앤비/소울"
+  | "포크/어쿠스틱"
+  | "인디";
 
-export const genres = [
+type Genre = {
+  name: GenreNames;
+  path: string;
+};
+
+export const genres: Genre[] = [
   {
     name: "댄스/팝",
     path: "dance",
@@ -10,8 +21,12 @@ export const genres = [
     path: "ballad",
   },
   {
+    name: "랩/힙합",
+    path: "rnh",
+  },
+  {
     name: "알앤비/소울",
-    path: "rnb",
+    path: "rns",
   },
   {
     name: "포크/어쿠스틱",
@@ -21,9 +36,4 @@ export const genres = [
     name: "인디",
     path: "indie",
   },
-].map(({ name, path }) => {
-  const genre = new Genre();
-  genre.name = name;
-  genre.path = path;
-  return genre;
-});
+];

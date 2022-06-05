@@ -1,38 +1,8 @@
 <template>
   <div>
     <img alt="mev logo image" :src="require('../static/mev.png')" />
-    <div class="sidebar-page columns">
-      <section class="sidebar-layout column">
-        <b-sidebar open position="static">
-          <div class="p-1">
-            <div class="block">
-              <b-menu class="is-custom-mobile">
-                <b-menu-list>
-                  <b-menu-item icon="account" label="My Account">
-                    <b-menu-item
-                      icon="account-box"
-                      label="내가 쓴 글"
-                    ></b-menu-item>
-                    <b-menu-item
-                      icon="account-box"
-                      label="내가 쓴 댓글"
-                    ></b-menu-item>
-                  </b-menu-item>
-                  <b-menu-item icon="menu" label="전체글 보기"></b-menu-item>
-                  <b-menu-item icon="menu-down" label="장르별 보기">
-                    <b-menu-item
-                      v-for="genre in genres"
-                      :key="genre.path"
-                      :label="genre.name"
-                    />
-                  </b-menu-item>
-                </b-menu-list>
-              </b-menu>
-            </div>
-          </div>
-        </b-sidebar>
-      </section>
-      <section class="column is-three-quarters">
+    <main class="columns p-4">
+      <section class="column">
         <div>
           <b-table :data="data" focusable>
             <template v-for="column in columns">
@@ -58,7 +28,7 @@
           </div>
         </div>
       </section>
-    </div>
+    </main>
   </div>
 </template>
 

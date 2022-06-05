@@ -1,9 +1,14 @@
 <template>
-  <div>
-    <LayoutHeader></LayoutHeader>
-    <main class="container">
-      <Nuxt />
-    </main>
+  <div class="root is-flex is-flex-direction-column">
+    <LayoutHeader />
+    <div class="is-flex-grow-1 is-flex">
+      <aside class="is-flex is-flex-direction-column">
+        <LayoutSidebar />
+      </aside>
+      <section>
+        <Nuxt />
+      </section>
+    </div>
   </div>
 </template>
 
@@ -12,3 +17,9 @@
     name: "DefaultLayout",
   };
 </script>
+
+<style>
+  .root {
+    min-height: 100vh;
+  }
+</style>

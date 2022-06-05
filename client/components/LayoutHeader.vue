@@ -1,9 +1,9 @@
 <template>
-  <b-navbar type="is-primary">
+  <b-navbar class="px-6 py-2" shadow>
     <template #brand>
       <b-navbar-item tag="router-link" :to="{ path: '/' }">
-        <b-icon icon="home"></b-icon>
-        <span>Home</span>
+        <b-icon class="pr-2" icon="home"></b-icon>
+        <span>Music Emotions Visualizer</span>
       </b-navbar-item>
     </template>
 

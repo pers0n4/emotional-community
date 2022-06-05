@@ -11,7 +11,7 @@ import { Comment } from "./comments/entities/comment.entity";
 import { Genre } from "./genres/entities/genre.entity";
 import { genres, tracks } from "./seeds";
 import { Track } from "./tracks/entities/track.entity";
-import { User } from "./users/entities/user.entity";
+import { UsersService } from "./users/users.service";
 
 @Injectable()
 export class AppService {
@@ -19,6 +19,7 @@ export class AppService {
 
   constructor(
     private readonly dataSource: DataSource,
+    private readonly usersService: UsersService,
     private readonly commentsService: CommentsService,
   ) {}
 
@@ -115,10 +116,13 @@ export class AppService {
         })[0];
       });
 
-      const user = new User();
-      user.email = "test@example.org";
-      user.password = "test";
-      await queryRunner.manager.save(user);
+      const email = "user@example.org";
+      const user =
+        (await this.usersService.findOneByEmail(email)) ??
+        (await this.usersService.create({
+          email,
+          password: "test",
+        }));
 
       const shouldAnalyze = false;
       if (shouldAnalyze) {

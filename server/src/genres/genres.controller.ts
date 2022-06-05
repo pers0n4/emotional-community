@@ -23,12 +23,8 @@ export class GenresController {
   }
 
   @Get()
-  findAll(@Query("name") name: string) {
-    if (name) {
-      return this.genresService.findByName(name);
-    } else {
-      return this.genresService.findAll();
-    }
+  findAll() {
+    return this.genresService.findAll();
   }
 
   @Get(":id")

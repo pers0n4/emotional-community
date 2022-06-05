@@ -6,6 +6,7 @@ import {
   Param,
   Patch,
   Post,
+  Query,
 } from "@nestjs/common";
 
 import { CreateTrackDto } from "./dto/create-track.dto";
@@ -22,8 +23,12 @@ export class TracksController {
   }
 
   @Get()
-  findAll() {
-    return this.tracksService.findAll();
+  findAll(@Query("genre") genre: string) {
+    if (genre) {
+      return this.tracksService.findByGenre(genre);
+    } else {
+      return this.tracksService.findAll();
+    }
   }
 
   @Get(":id")

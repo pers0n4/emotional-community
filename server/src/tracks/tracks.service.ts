@@ -38,6 +38,17 @@ export class TracksService {
     });
   }
 
+  async findByGenre(genre: string) {
+    return this.tracksRepository.find({
+      where: {
+        genres: {
+          name: genre,
+        },
+      },
+      loadEagerRelations: false,
+    });
+  }
+
   async findOne(id: number) {
     return this.tracksRepository.findOneBy({ id }).then((track) => {
       const { sentiments, entities } = track.comments.reduce(

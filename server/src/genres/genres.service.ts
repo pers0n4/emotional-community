@@ -46,24 +46,6 @@ export class GenresService {
     });
   }
 
-  async findByName(name: string) {
-    return this.genresRepository.findOne({
-      where: { name },
-      relations: {
-        tracks: true,
-      },
-    });
-  }
-
-  async findByPath(path: string) {
-    return this.genresRepository.findOne({
-      where: { path },
-      relations: {
-        tracks: true,
-      },
-    });
-  }
-
   async update(id: number, updateGenreDto: UpdateGenreDto) {
     return this.genresRepository.update(id, updateGenreDto);
   }

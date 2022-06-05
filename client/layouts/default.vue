@@ -5,7 +5,7 @@
       <aside class="is-flex is-flex-direction-column">
         <LayoutSidebar />
       </aside>
-      <section>
+      <section class="is-flex-grow-1">
         <Nuxt />
       </section>
     </div>

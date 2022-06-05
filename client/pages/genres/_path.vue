@@ -47,7 +47,7 @@
       clickTableRow(track) {
         this.$router.push({
           name: "tracks-id",
-          params: { id: track.id },
+          params: { id: track.id, track: `${track.title} - ${track.artist}` },
         });
       },
     },

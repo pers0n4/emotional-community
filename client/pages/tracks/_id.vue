@@ -1,6 +1,6 @@
 <template>
   <main class="p-4">
-    <h2 class="is-size-2">{{ id }}</h2>
+    <h2 class="is-size-2">{{ track }}</h2>
     <ul>
       <li v-for="comment in comments" :key="comment.id">
         {{ comment.body }}
@@ -12,7 +12,7 @@
 <script>
   export default {
     async asyncData({ $axios, params }) {
-      const { id } = params;
+      const { id, track } = params;
 
       const comments = await $axios.$get(`/comments`, {
         params: {
@@ -20,7 +20,7 @@
         },
       });
 
-      return { id, comments };
+      return { id, track, comments };
     },
   };
 </script>

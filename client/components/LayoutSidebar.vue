@@ -17,7 +17,12 @@
               :key="genre.path"
               icon="disc"
               :label="genre.name"
-              @click="$router.push({ path: `/genres/${genre.path}` })"
+              @click="
+                $router.push({
+                  name: 'genres-path',
+                  params: { path: genre.path, genre: genre.name },
+                })
+              "
             />
           </b-menu-item>
         </b-menu-list>

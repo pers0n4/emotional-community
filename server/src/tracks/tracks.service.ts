@@ -33,7 +33,9 @@ export class TracksService {
   }
 
   async findAll() {
-    return this.tracksRepository.find();
+    return this.tracksRepository.find({
+      loadEagerRelations: false,
+    });
   }
 
   async findOne(id: number) {

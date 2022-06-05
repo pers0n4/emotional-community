@@ -24,9 +24,8 @@
                       v-for="genre in genres"
                       :key="genre.path"
                       :label="genre.name"
-                    ></b-menu-item>
-                    ></b-menu-item
-                  >
+                    />
+                  </b-menu-item>
                 </b-menu-list>
               </b-menu>
             </div>

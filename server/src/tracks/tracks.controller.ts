@@ -26,9 +26,8 @@ export class TracksController {
   findAll(@Query("genre") genre: string) {
     if (genre) {
       return this.tracksService.findByGenre(genre);
-    } else {
-      return this.tracksService.findAll();
     }
+    return this.tracksService.findAll();
   }
 
   @Get(":id")

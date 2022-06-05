@@ -1,14 +1,12 @@
 <template>
   <main class="p-4">
     <h2 class="is-size-2">{{ genre }}</h2>
-    <ul>
-      <li v-for="track in tracks" :key="track.id">
-        <nuxt-link :to="{ name: 'tracks-id', params: { id: track.id } }">
-          {{ track.id }}
-        </nuxt-link>
-        {{ track }}
-      </li>
-    </ul>
+    <b-table
+      :columns="columns"
+      :data="tracks"
+      hoverable
+      @click="clickTableRow"
+    />
   </main>
 </template>
 
@@ -24,6 +22,34 @@
       });
 
       return { path, genre, tracks };
+    },
+    data() {
+      return {
+        columns: [
+          {
+            label: "ID",
+            field: "id",
+            width: 50,
+            numeric: true,
+          },
+          {
+            label: "Title",
+            field: "title",
+          },
+          {
+            label: "Artist",
+            field: "artist",
+          },
+        ],
+      };
+    },
+    methods: {
+      clickTableRow(track) {
+        this.$router.push({
+          name: "tracks-id",
+          params: { id: track.id },
+        });
+      },
     },
   };
 </script>

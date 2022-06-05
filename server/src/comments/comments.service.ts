@@ -79,6 +79,12 @@ export class CommentsService {
     return this.commentsRepository.find();
   }
 
+  async findByTrack(trackId: number) {
+    return this.commentsRepository.find({
+      where: { trackId },
+    });
+  }
+
   async findOne(id: number) {
     return this.commentsRepository.findOneBy({
       id,

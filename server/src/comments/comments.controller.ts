@@ -6,6 +6,7 @@ import {
   Param,
   Patch,
   Post,
+  Query,
   UseGuards,
 } from "@nestjs/common";
 
@@ -31,7 +32,10 @@ export class CommentsController {
   }
 
   @Get()
-  async findAll() {
+  async findAll(@Query("track") trackId: number) {
+    if (trackId) {
+      return this.commentsService.findByTrack(trackId);
+    }
     return this.commentsService.findAll();
   }
 

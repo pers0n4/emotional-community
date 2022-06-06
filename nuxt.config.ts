@@ -34,6 +34,7 @@ const config: NuxtConfig = {
     "@nuxt/typescript-build",
     // https://go.nuxtjs.dev/stylelint
     "@nuxtjs/stylelint-module",
+    "@nuxtjs/composition-api/module",
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -90,7 +91,9 @@ const config: NuxtConfig = {
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {},
+  build: {
+    transpile: ["echarts", "zrender"],
+  },
 
   telemetry: false,
 };

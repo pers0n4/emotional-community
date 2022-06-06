@@ -8,17 +8,11 @@
     <div
       v-for="comment in comments"
       :key="comment.id"
-      class="notification is-light"
+      class="notification is-light mb-2 p-4"
       :class="[classes[comment.confirmedSentiment]]"
     >
       {{ comment.body }}
     </div>
-
-    <ul>
-      <li v-for="comment in comments" :key="comment.id">
-        {{ comment.body }}
-      </li>
-    </ul>
   </main>
 </template>
 
@@ -66,10 +60,16 @@
         sentimentChart: null,
         wordCloud: null,
         classes: {
-          POSITIVE: "is-success",
+          POSITIVE: "is-info",
           NEGATIVE: "is-danger",
-          NEUTRAL: "is-info",
+          NEUTRAL: "is-success",
           MIXED: "is-warning",
+        },
+        chartColors: {
+          POSITIVE: "#5470c6",
+          NEGATIVE: "#ee6666",
+          NEUTRAL: "#91cc75",
+          MIXED: "#fac858",
         },
       };
     },
@@ -90,6 +90,9 @@
             data: Object.entries(this.sentiments).map(([key, value]) => ({
               value,
               name: key,
+              itemStyle: {
+                color: this.chartColors[key],
+              },
             })),
           },
         ],
@@ -135,6 +138,6 @@
 
 <style scoped>
   .chart {
-    height: 300px;
+    height: 400px;
   }
 </style>

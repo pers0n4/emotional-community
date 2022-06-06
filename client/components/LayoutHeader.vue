@@ -34,6 +34,7 @@
     methods: {
       signOut() {
         this.$auth.logout();
+        this.$axios.setToken(false);
       },
     },
   };

@@ -54,6 +54,7 @@
               password: this.password,
             },
           });
+          this.$axios.setToken(this.$auth.strategy.token.get());
         } catch (err) {
           // eslint-disable-next-line no-console
           console.error(err);

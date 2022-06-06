@@ -50,23 +50,32 @@ export class TracksService {
   }
 
   async findOne(id: number) {
-    return this.tracksRepository.findOneBy({ id }).then((track) => {
-      const { sentiments, entities } = track.comments.reduce(
-        (acc, comment) => {
-          acc["sentiments"][comment.confirmedSentiment] =
-            (acc["sentiments"][comment.confirmedSentiment] || 0) + 1;
-          for (const entity of comment.confirmedEntities
-            .split(",")
-            .filter(Boolean)) {
-            acc["entities"][entity] = (acc["entities"][entity] || 0) + 1;
-          }
-          return acc;
+    return this.tracksRepository
+      .findOne({
+        where: { id },
+        order: {
+          comments: {
+            id: "DESC",
+          },
         },
-        { sentiments: {}, entities: {} },
-      );
+      })
+      .then((track) => {
+        const { sentiments, entities } = track.comments.reduce(
+          (acc, comment) => {
+            acc["sentiments"][comment.confirmedSentiment] =
+              (acc["sentiments"][comment.confirmedSentiment] || 0) + 1;
+            for (const entity of comment.confirmedEntities
+              .split(",")
+              .filter(Boolean)) {
+              acc["entities"][entity] = (acc["entities"][entity] || 0) + 1;
+            }
+            return acc;
+          },
+          { sentiments: {}, entities: {} },
+        );
 
-      return { ...track, sentiments, entities };
-    });
+        return { ...track, sentiments, entities };
+      });
   }
 
   async update(id: number, updateTrackDto: UpdateTrackDto) {

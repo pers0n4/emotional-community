@@ -1,6 +1,6 @@
 <template>
   <main class="p-4">
-    <h2 class="is-size-2">{{ track }}</h2>
+    <h2 class="title">{{ track }}</h2>
     <ul>
       <li v-for="comment in comments" :key="comment.id">
         {{ comment.body }}

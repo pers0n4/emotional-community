@@ -1,6 +1,6 @@
 <template>
   <main class="p-4">
-    <h2 class="is-size-2">{{ genre }}</h2>
+    <h2 class="title">{{ genre }}</h2>
     <b-table
       :columns="columns"
       :data="tracks"

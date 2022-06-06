@@ -1,6 +1,6 @@
 <template>
   <main class="p-4">
-    <h2 class="is-size-2">전체 보기</h2>
+    <h2 class="title">전체 보기</h2>
     <b-table
       :columns="columns"
       :data="tracks"

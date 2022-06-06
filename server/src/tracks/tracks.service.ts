@@ -38,6 +38,27 @@ export class TracksService {
     });
   }
 
+  async findAllAndStatistics() {
+    const tracks = await this.tracksRepository.find();
+    return tracks.map((track) => {
+      const { sentiments, entities } = track.comments.reduce(
+        (acc, comment) => {
+          acc["sentiments"][comment.confirmedSentiment] =
+            (acc["sentiments"][comment.confirmedSentiment] || 0) + 1;
+          for (const entity of comment.confirmedEntities
+            ?.split(",")
+            .filter(Boolean)) {
+            acc["entities"][entity] = (acc["entities"][entity] || 0) + 1;
+          }
+          return acc;
+        },
+        { sentiments: {}, entities: {} },
+      );
+
+      return { ...track, sentiments, entities };
+    });
+  }
+
   async findByGenre(genre: string) {
     return this.tracksRepository.find({
       where: {

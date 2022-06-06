@@ -23,9 +23,15 @@ export class TracksController {
   }
 
   @Get()
-  findAll(@Query("genre") genre: string) {
+  findAll(
+    @Query("genre") genre: string,
+    @Query("statistics") statistics: boolean,
+  ) {
     if (genre) {
       return this.tracksService.findByGenre(genre);
+    }
+    if (statistics) {
+      return this.tracksService.findAllAndStatistics();
     }
     return this.tracksService.findAll();
   }

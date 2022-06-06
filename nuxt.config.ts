@@ -93,7 +93,6 @@ const config: NuxtConfig = {
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
     transpile: ["echarts", "zrender"],
-    vendor: ["echarts-wordcloud"],
   },
 
   telemetry: false,

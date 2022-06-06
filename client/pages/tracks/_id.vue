@@ -5,6 +5,15 @@
       <v-chart class="chart" :option="sentimentChart" />
       <v-chart class="chart" :option="wordCloud" />
     </section>
+    <div
+      v-for="comment in comments"
+      :key="comment.id"
+      class="notification is-light"
+      :class="[classes[comment.confirmedSentiment]]"
+    >
+      {{ comment.body }}
+    </div>
+
     <ul>
       <li v-for="comment in comments" :key="comment.id">
         {{ comment.body }}
@@ -56,6 +65,12 @@
       return {
         sentimentChart: null,
         wordCloud: null,
+        classes: {
+          POSITIVE: "is-success",
+          NEGATIVE: "is-danger",
+          NEUTRAL: "is-info",
+          MIXED: "is-warning",
+        },
       };
     },
     created() {

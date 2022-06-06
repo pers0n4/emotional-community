@@ -5,6 +5,29 @@
       <v-chart class="chart" :option="sentimentChart" />
       <v-chart class="chart" :option="wordCloud" />
     </section>
+    <section class="mb-5">
+      <b-field label="Comment">
+        <b-input
+          v-model="commentModel"
+          :disabled="!$auth.loggedIn"
+          expanded
+          has-counter
+          :placeholder="
+            !$auth.loggedIn && '코멘트를 작성하려면 로그인해주세요.'
+          "
+          type="textarea"
+        />
+        <p class="control">
+          <b-button
+            class="comment-button"
+            :disabled="!$auth.loggedIn"
+            label="작성"
+            type="is-primary"
+            @click="writeComment"
+          />
+        </p>
+      </b-field>
+    </section>
     <div
       v-for="comment in comments"
       :key="comment.id"
@@ -57,6 +80,7 @@
     },
     data() {
       return {
+        commentModel: "",
         sentimentChart: null,
         wordCloud: null,
         classes: {
@@ -133,11 +157,37 @@
         ],
       };
     },
+    methods: {
+      async writeComment() {
+        const { id, commentModel } = this;
+        await this.$axios.$post(
+          `/comments`,
+          {
+            body: commentModel,
+            trackId: Number(id),
+          },
+          {
+            headers: {
+              Authorization: this.$auth.strategy.token.get(),
+            },
+          },
+        );
+        this.commentModel = "";
+
+        setTimeout(() => {
+          this.$nuxt.refresh();
+        }, 500);
+      },
+    },
   };
 </script>
 
 <style scoped>
   .chart {
     height: 400px;
+  }
+
+  .comment-button {
+    height: 100%;
   }
 </style>

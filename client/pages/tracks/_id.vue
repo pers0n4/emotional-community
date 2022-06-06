@@ -2,8 +2,16 @@
   <main class="p-4">
     <h2 class="title">{{ title }} - {{ artist }}</h2>
     <section class="is-flex">
-      <v-chart class="chart" :option="sentimentChart" />
-      <v-chart class="chart" :option="wordCloud" />
+      <v-chart
+        class="chart"
+        :init-options="{ renderer: 'svg', autoresize: true }"
+        :option="sentimentChart"
+      />
+      <v-chart
+        class="chart"
+        :init-options="{ renderer: 'svg', autoresize: true }"
+        :option="wordCloud"
+      />
     </section>
     <section class="mb-5">
       <b-field label="Comment">
@@ -48,11 +56,12 @@
   } from "echarts/components";
   import { use } from "echarts/core";
   import theme from "echarts/lib/theme/light";
-  import { CanvasRenderer } from "echarts/renderers";
+  import { CanvasRenderer, SVGRenderer } from "echarts/renderers";
   import VChart from "vue-echarts";
 
   use([
     CanvasRenderer,
+    SVGRenderer,
     PieChart,
     TitleComponent,
     TooltipComponent,
@@ -110,7 +119,7 @@
           {
             name: "Sentiment",
             type: "pie",
-            radius: "50%",
+            radius: "80%",
             data: Object.entries(this.sentiments).map(([key, value]) => ({
               value,
               name: key,
@@ -130,14 +139,14 @@
             // keepAspect: false,
             // left: "center",
             // top: "center",
-            // width: "70%",
+            width: "80%",
             // height: "80%",
             // right: null,
             // bottom: null,
-            // sizeRange: [12, 60],
+            sizeRange: [16, 96],
             // rotationRange: [-90, 90],
             // rotationStep: 45,
-            // gridSize: 8,
+            gridSize: 10,
             // drawOutOfBound: false,
             // layoutAnimation: true,
             textStyle: {
@@ -148,6 +157,9 @@
                   Math.floor(Math.random() * theme.color.length)
                 ];
               },
+            },
+            emphasis: {
+              focus: "self",
             },
             data: Object.entries(this.entities).map(([key, value]) => ({
               name: key,

@@ -13,10 +13,14 @@
           >
             <div class="image is-square">
               <div
-                class="has-ratio is-flex is-flex-direction-column is-justify-content-flex-end is-align-items-center"
+                class="has-ratio is-flex is-flex-direction-column is-align-items-center"
               >
-                <b-icon custom-size="mdi-96px" icon="disc" />
-                <span class="mt-6 subtitle">{{ genre.name }}</span>
+                <div class="is-flex-grow-1 is-flex is-align-items-center">
+                  <b-icon custom-size="mdi-96px" icon="disc" />
+                </div>
+                <div>
+                  <span class="mt-6 subtitle">{{ genre.name }}</span>
+                </div>
               </div>
             </div>
           </nuxt-link>

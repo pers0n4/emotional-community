@@ -29,6 +29,11 @@
               "
             />
           </b-menu-item>
+          <b-menu-item
+            icon="heart"
+            label="감정 보기"
+            @click="$router.push({ name: 'sentiments' })"
+          />
         </b-menu-list>
       </b-menu>
     </div>

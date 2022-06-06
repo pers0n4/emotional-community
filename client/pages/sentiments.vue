@@ -1,7 +1,12 @@
 <template>
   <main class="p-4">
     <h2 class="title">감정 보기</h2>
-    <b-table :data="tracks" hoverable @click="clickTableRow">
+    <b-table
+      :data="tracks"
+      :default-sort="['POSITIVE', 'desc']"
+      hoverable
+      @click="clickTableRow"
+    >
       <b-table-column v-slot="props" field="id" label="ID" numeric width="50">
         {{ props.row.id }}
       </b-table-column>

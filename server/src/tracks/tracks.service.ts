@@ -65,7 +65,7 @@ export class TracksService {
             acc["sentiments"][comment.confirmedSentiment] =
               (acc["sentiments"][comment.confirmedSentiment] || 0) + 1;
             for (const entity of comment.confirmedEntities
-              .split(",")
+              ?.split(",")
               .filter(Boolean)) {
               acc["entities"][entity] = (acc["entities"][entity] || 0) + 1;
             }

@@ -109,58 +109,6 @@
 
       return { tracks: cleanedTracks };
     },
-    data() {
-      return {
-        columns: [
-          {
-            label: "ID",
-            field: "id",
-            width: 50,
-            numeric: true,
-          },
-          {
-            label: "Title",
-            field: "title",
-          },
-          {
-            label: "Artist",
-            field: "artist",
-          },
-          {
-            label: "POSITIVE",
-            field: "POSITIVE",
-            numeric: true,
-            sortable: true,
-            headerClass: "has-background-info-light",
-            cellClass: "has-background-info-light",
-          },
-          {
-            label: "NEGATIVE",
-            field: "NEGATIVE",
-            numeric: true,
-            sortable: true,
-            headerClass: "has-background-danger-light",
-            cellClass: "has-background-danger-light",
-          },
-          {
-            label: "MIXED",
-            field: "MIXED",
-            numeric: true,
-            sortable: true,
-            headerClass: "has-background-warning-light",
-            cellClass: "has-background-warning-light",
-          },
-          {
-            label: "NEUTRAL",
-            field: "NEUTRAL",
-            numeric: true,
-            sortable: true,
-            headerClass: "has-background-success-light",
-            cellClass: "has-background-success-light",
-          },
-        ],
-      };
-    },
     methods: {
       clickTableRow(track) {
         this.$router.push({

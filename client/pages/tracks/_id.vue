@@ -172,18 +172,10 @@
     methods: {
       async writeComment() {
         const { id, commentModel } = this;
-        await this.$axios.$post(
-          `/comments`,
-          {
-            body: commentModel,
-            trackId: Number(id),
-          },
-          {
-            headers: {
-              Authorization: this.$auth.strategy.token.get(),
-            },
-          },
-        );
+        await this.$axios.$post(`/comments`, {
+          body: commentModel,
+          trackId: Number(id),
+        });
         this.commentModel = "";
 
         setTimeout(() => {

@@ -56,9 +56,14 @@
           });
           this.$axios.setToken(this.$auth.strategy.token.get());
         } catch (err) {
-          // eslint-disable-next-line no-console
-          console.error(err);
+          this.notifySignInFail();
         }
+      },
+      notifySignInFail() {
+        this.$buefy.notification.open({
+          message: "로그인 실패",
+          type: "is-danger",
+        });
       },
     },
   };

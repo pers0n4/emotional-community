@@ -42,6 +42,11 @@
       class="notification is-light mb-2 p-4"
       :class="[classes[comment.confirmedSentiment]]"
     >
+      <button
+        v-if="comment.userId === userId"
+        class="delete"
+        @click="deleteComment(comment.id)"
+      />
       {{ comment.body }}
     </div>
   </main>
@@ -72,11 +77,17 @@
     components: {
       VChart,
     },
-    async asyncData({ $axios, params }) {
+    async asyncData({ params, $axios, $auth }) {
       const { id } = params;
 
       const { title, artist, comments, sentiments, entities } =
         await $axios.$get(`/tracks/${id}`);
+
+      let userId = null;
+      if ($auth.loggedIn) {
+        const user = await $axios.$get("/auth/token");
+        userId = user.id;
+      }
 
       return {
         id,
@@ -85,6 +96,7 @@
         comments,
         sentiments,
         entities,
+        userId,
       };
     },
     data() {
@@ -180,7 +192,14 @@
 
         setTimeout(() => {
           this.$nuxt.refresh();
-        }, 500);
+        }, 1000);
+      },
+      async deleteComment(commentId) {
+        await this.$axios.$delete(`/comments/${commentId}`);
+
+        setTimeout(() => {
+          this.$nuxt.refresh();
+        }, 1000);
       },
     },
   };

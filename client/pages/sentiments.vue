@@ -11,7 +11,7 @@
         {{ props.row.id }}
       </b-table-column>
 
-      <b-table-column v-slot="props" field="title" label="Titlte">
+      <b-table-column v-slot="props" field="title" label="Title">
         {{ props.row.title }}
       </b-table-column>
 

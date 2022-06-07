@@ -42,6 +42,9 @@ export class Comment {
   @JoinColumn({ name: "trackId" })
   track: Track;
 
+  @Column()
+  userId: number;
+
   @Exclude()
   @ManyToOne(() => User, (user) => user.comments)
   @JoinColumn()
